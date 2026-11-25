@@ -1,0 +1,46 @@
+---
+/* Groove stripes: four parallel bands running along an edge and
+   curving around a corner, like 70s racing stripes. */
+interface Props {
+  corner?: 'top-right' | 'bottom-left' | 'bottom-right';
+  colors?: string[];
+  class?: string;
+}
+const {
+  corner = 'top-right',
+  colors = ['var(--light-gold)', 'var(--gold)', 'var(--orange)', 'var(--cream)'],
+  class: className = '',
+} = Astro.props;
+
+const size = 320;
+const band = 16;
+const start = 26;
+// Each stripe runs along the top edge then bends down the right edge.
+const paths = colors.map((_, i) => {
+  const offset = start + i * band;
+  const r = 70 + (colors.length - 1 - i) * band;
+  return `M0 ${offset} H${size - offset - r} A${r} ${r} 0 0 1 ${size - offset} ${offset + r} V${size}`;
+});
+const transform =
+  corner === 'bottom-left'
+    ? 'rotate(180deg)'
+    : corner === 'bottom-right'
+      ? 'scaleY(-1)'
+      : 'none';
+---
+
+<svg
+  class={`groove ${className}`}
+  viewBox={`0 0 ${size} ${size}`}
+  aria-hidden="true"
+  style={`transform:${transform}`}
+>
+  {paths.map((d, i) => <path d={d} fill="none" stroke={colors[i]} stroke-width={band - 4} stroke-linecap="butt" />)}
+</svg>
+
+<style>
+  .groove {
+    width: 100%;
+    height: auto;
+  }
+</style>

@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+
+<Layout title="Page not found">
+  <PageHeader
+    label="Page not found"
+    title="This street isn’t on our map."
+    lede="The page you were looking for has moved or never existed. Head home, or start a conversation and we will point you the right way."
+  >
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/">Go to the home page</a>
+      <a class="btn btn-dark" href="/contact/">Start a conversation</a>
+    </div>
+  </PageHeader>
+</Layout>

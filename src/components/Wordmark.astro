@@ -1,0 +1,78 @@
+---
+interface Props {
+  size?: 'sm' | 'lg';
+  tone?: 'light' | 'dark';
+}
+const { size = 'sm', tone = 'dark' } = Astro.props;
+---
+
+<span class={`wordmark wordmark-${size} wordmark-${tone}`}>
+  <img src="/images/cvn-coin-256.png" alt="" width="256" height="256" class="coin" />
+  <span class="words">
+    <span class="convo">ConVo</span>
+    <span class="hood">Neighborhood</span>
+  </span>
+</span>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .coin {
+    width: 46px;
+    height: 46px;
+    flex: none;
+  }
+
+  .words {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .convo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    line-height: 0.95;
+  }
+
+  .hood {
+    font-family: var(--font-label);
+    font-size: 0.66rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .wordmark-dark .convo {
+    color: var(--espresso);
+  }
+
+  .wordmark-dark .hood {
+    color: var(--deep-gold);
+  }
+
+  .wordmark-light .convo {
+    color: var(--light-gold);
+  }
+
+  .wordmark-light .hood {
+    color: var(--cream);
+  }
+
+  .wordmark-lg .coin {
+    width: 72px;
+    height: 72px;
+  }
+
+  .wordmark-lg .convo {
+    font-size: 2.4rem;
+  }
+
+  .wordmark-lg .hood {
+    font-size: 0.8rem;
+  }
+</style>

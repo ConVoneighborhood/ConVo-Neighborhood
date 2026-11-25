@@ -1,0 +1,116 @@
+---
+import Wordmark from './Wordmark.astro';
+import WaveBand from './WaveBand.astro';
+import { site, nav } from '../site.js';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer on-dark">
+  <WaveBand
+    colors={['var(--light-gold)', 'var(--gold)', 'var(--orange)', 'var(--espresso)']}
+    background="var(--cream)"
+    height={60}
+  />
+  <div class="wrap footer-grid">
+    <div class="brand">
+      <Wordmark size="lg" tone="light" />
+      <p class="motto">ConVo is a conversation. We just wanna start the conversation… the rest is history.</p>
+    </div>
+
+    <div>
+      <h2 class="col-title">Visit</h2>
+      <ul>
+        <li><a href="/">Home</a></li>
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="col-title">Talk to us</h2>
+      <ul>
+        <li><a href={site.phoneHref}>{site.phoneDisplay}</a></li>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li>{site.city} and remote</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap legal">
+    <p>© {year} ConVo Neighborhood. Branding • Consulting • Business Development.</p>
+    <p><a href="/terms/">Terms of use</a> <span aria-hidden="true">/</span> <a href="/privacy/">Privacy policy</a></p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-bottom: 28px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1.2fr;
+    gap: 40px;
+    padding-top: 56px;
+    padding-bottom: 40px;
+  }
+
+  .motto {
+    margin-top: 20px;
+    max-width: 30ch;
+    font-size: 1.05rem;
+  }
+
+  .col-title {
+    font-family: var(--font-label);
+    font-size: 1rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--light-gold);
+    margin-bottom: 14px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  ul a {
+    text-decoration: none;
+    color: var(--cream);
+    overflow-wrap: anywhere;
+  }
+
+  ul a:hover {
+    color: var(--light-gold);
+    text-decoration: underline;
+  }
+
+  li {
+    color: #e9dfcb;
+  }
+
+  .legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(232, 195, 106, 0.3);
+    font-size: 0.9rem;
+  }
+
+  .legal p {
+    margin: 0;
+    color: #cfc3aa;
+  }
+
+  @media (max-width: 760px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>

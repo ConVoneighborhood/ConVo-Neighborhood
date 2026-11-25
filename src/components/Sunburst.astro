@@ -1,0 +1,41 @@
+---
+/* Sunburst: a half sun rising from an edge, alternating rays around a gold core. */
+interface Props {
+  rays?: number;
+  rayColor?: string;
+  altColor?: string;
+  coreColor?: string;
+  class?: string;
+}
+const {
+  rays = 16,
+  rayColor = 'var(--light-gold)',
+  altColor = 'transparent',
+  coreColor = 'var(--gold)',
+  class: className = '',
+} = Astro.props;
+
+const cx = 300;
+const cy = 300;
+const R = 300;
+const wedges = Array.from({ length: rays }, (_, i) => {
+  const a0 = Math.PI + (i * Math.PI) / rays;
+  const a1 = Math.PI + ((i + 1) * Math.PI) / rays;
+  const p = (a: number) => `${(cx + R * Math.cos(a)).toFixed(2)} ${(cy + R * Math.sin(a)).toFixed(2)}`;
+  return { d: `M${cx} ${cy} L${p(a0)} A${R} ${R} 0 0 1 ${p(a1)} Z`, fill: i % 2 === 0 ? rayColor : altColor };
+});
+---
+
+<svg class={`sunburst ${className}`} viewBox="0 0 600 300" aria-hidden="true">
+  <g class="rays">
+    {wedges.map((w) => <path d={w.d} fill={w.fill} />)}
+  </g>
+  <path d={`M${cx - 92} ${cy} A92 92 0 0 1 ${cx + 92} ${cy} Z`} fill={coreColor} />
+</svg>
+
+<style>
+  .sunburst {
+    width: 100%;
+    height: auto;
+  }
+</style>

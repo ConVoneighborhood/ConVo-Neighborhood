@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import LegalBody from '../components/LegalBody.astro';
+import { site } from '../site.js';
+---
+
+<Layout title="Terms of use" description="The terms for using ConVo Neighborhood's website and services.">
+  <PageHeader label="Legal" title="Terms of use" lede="Last updated November 2026." />
+  <LegalBody>
+    <h2>1. Acceptance of terms</h2>
+    <p>
+      By accessing or using ConVo Neighborhood (“CVN,” “we,” “our,” or “us”), you agree to be bound by these Terms of Use.
+      If you do not agree, please do not use our platform, services, or ecosystem.
+    </p>
+
+    <h2>2. Services overview</h2>
+    <p>ConVo Neighborhood is a branding and consulting firm providing digital services, including but not limited to:</p>
+    <ul>
+      <li>Brand development and strategy</li>
+      <li>Business consulting</li>
+      <li>Digital ecosystem integration</li>
+      <li>Access to third-party platforms and tools</li>
+    </ul>
+    <p>We reserve the right to modify, suspend, or discontinue any service at any time.</p>
+
+    <h2>3. User responsibilities</h2>
+    <p>You agree to:</p>
+    <ul>
+      <li>Provide accurate and complete information</li>
+      <li>Use our services lawfully and ethically</li>
+      <li>Respect intellectual property and platform integrity</li>
+    </ul>
+    <p>You may not:</p>
+    <ul>
+      <li>Misuse, copy, or exploit our systems or content without permission</li>
+      <li>Attempt unauthorized access to any part of the ecosystem</li>
+    </ul>
+
+    <h2>4. Payments and refunds</h2>
+    <p>
+      All payments for services are non-refundable unless otherwise stated in writing. Service delivery timelines and
+      follow-ups are based on the scope of each individual service agreement.
+    </p>
+
+    <h2>5. Third-party integrations</h2>
+    <p>Our ecosystem may integrate with third-party platforms, tools, or services. We are not responsible for:</p>
+    <ul>
+      <li>Third-party content, policies, or practices</li>
+      <li>Downtime, errors, or data handling by external platforms</li>
+    </ul>
+    <p>Users are encouraged to review each third party’s terms and policies.</p>
+
+    <h2>6. Intellectual property</h2>
+    <p>
+      All content, branding systems, frameworks, and materials created by CVN remain the intellectual property of ConVo
+      Neighborhood unless otherwise agreed in writing.
+    </p>
+    <p>Clients are granted usage rights only as defined within their service agreement.</p>
+
+    <h2>7. Limitation of liability</h2>
+    <p>ConVo Neighborhood is not liable for:</p>
+    <ul>
+      <li>Business outcomes, losses, or damages resulting from service use</li>
+      <li>Indirect or incidental damages</li>
+      <li>Platform interruptions or ecosystem changes</li>
+    </ul>
+
+    <h2>8. Termination</h2>
+    <p>We reserve the right to suspend or terminate access to our services at our discretion if terms are violated.</p>
+
+    <h2>Contact</h2>
+    <p>
+      For questions regarding these Terms, contact the ConVo Neighborhood Support Team at
+      <a href={`mailto:${site.email}`}>{site.email}</a>.
+    </p>
+  </LegalBody>
+</Layout>

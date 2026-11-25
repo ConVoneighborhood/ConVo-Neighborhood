@@ -1,0 +1,60 @@
+---
+import Sunburst from './Sunburst.astro';
+
+interface Props {
+  label: string;
+  title: string;
+  lede?: string;
+}
+const { label, title, lede } = Astro.props;
+---
+
+<section class="page-header on-dark">
+  <div class="sun" aria-hidden="true">
+    <Sunburst rays={14} rayColor="var(--orange)" coreColor="var(--light-gold)" />
+  </div>
+  <div class="wrap inner">
+    <p class="label">{label}</p>
+    <h1>{title}</h1>
+    {lede && <p class="lede">{lede}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-header {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(56px, 8vw, 104px);
+    border-bottom: 10px solid var(--orange);
+  }
+
+  .inner {
+    position: relative;
+  }
+
+  .page-header h1 {
+    color: var(--cream);
+    max-width: 16ch;
+    font-size: clamp(2.4rem, 1.6rem + 3.6vw, 4.4rem);
+  }
+
+  .page-header .lede {
+    max-width: 40rem;
+  }
+
+  .sun {
+    position: absolute;
+    right: -60px;
+    bottom: 0;
+    width: clamp(260px, 34vw, 520px);
+    opacity: 0.95;
+  }
+
+  @media (max-width: 760px) {
+    .sun {
+      opacity: 0.25;
+      right: -90px;
+    }
+  }
+</style>

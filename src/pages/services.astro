@@ -1,0 +1,277 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { departments, packages } from '../content.js';
+---
+
+<Layout
+  title="Services"
+  description="Business consulting, branding, websites, marketing, job seeker support and more from ConVo Neighborhood in Austin, Texas."
+>
+  <PageHeader
+    label="Services"
+    title="Everything your business needs, in one conversation."
+    lede="ConVo Neighborhood is organized into departments. You talk to one team, and we bring in the right people for each part of the work."
+  />
+
+  <section class="section" aria-labelledby="dept-title">
+    <div class="wrap">
+      <h2 id="dept-title" class="visually-hidden">Our departments</h2>
+      <nav class="jump" aria-label="Jump to a department">
+        <ul>
+          {departments.map((d) => (
+            <li><a href={`#${d.id}`}>{d.name}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="depts">
+        {departments.map((d) => (
+          <article class="sticker dept" id={d.id}>
+            <h3>{d.name}</h3>
+            <p class="summary">{d.summary}</p>
+            <ul class="items">
+              {d.items.map((item) => <li>{item}</li>)}
+            </ul>
+            {d.note && <p class="note">{d.note}</p>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section on-paper" aria-labelledby="jobs-title">
+    <div class="wrap jobs">
+      <div>
+        <p class="label">Job seekers</p>
+        <h2 id="jobs-title">Your next job can be more than a paycheck.</h2>
+        <p class="lede">
+          We help you find work in the city you live in now, while building a clear path toward financial stability,
+          career growth and the work you actually want to do.
+        </p>
+        <p>
+          When you are ready, we help plan your exit toward a business, side hustle or creative career. Websites, logos,
+          branding and networking are there when you need them, and you decide what to invest in.
+        </p>
+        <p>Our free Job Finder program is the place to start.</p>
+        <a class="btn btn-primary" href="/contact/?topic=jobs">Book a job seeker conversation</a>
+      </div>
+      <ul class="job-list">
+        <li><strong>Resume and CV support.</strong> Show your experience, skills and goals clearly.</li>
+        <li><strong>Job and career research.</strong> Openings near you that fit your experience and your money needs.</li>
+        <li><strong>Career direction.</strong> A route toward the industry or passion you want to work in.</li>
+        <li><strong>Job exit planning.</strong> A plan for moving from a job to your own thing.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="pkg-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Annual packages</p>
+        <h2 id="pkg-title">Twelve months with a team in your corner.</h2>
+        <p class="lede">
+          Every package is a 12-month service agreement. You pay a 20% deposit to start, then monthly or quarterly. Ask us
+          for pricing and we will match a package to where you are.
+        </p>
+      </div>
+      <ul class="pkgs">
+        {packages.map((p) => (
+          <li class="sticker pkg">
+            <h3>{p.name}</h3>
+            <p class="for">{p.for}</p>
+            <p>{p.body}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/contact/?topic=packages">Ask about packages and pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction title="Not sure where to start?" body="That is what the first conversation is for. Tell us what is going on and we will point you to the right department." />
+</Layout>
+
+<style>
+  .jump ul {
+    list-style: none;
+    margin: 0 0 48px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .jump a {
+    display: inline-block;
+    padding: 8px 16px;
+    font-family: var(--font-label);
+    font-size: 0.95rem;
+    color: var(--espresso);
+    text-decoration: none;
+    background: var(--cream);
+    border: 2px solid var(--espresso);
+    border-radius: var(--radius-pill);
+  }
+
+  .jump a:hover {
+    background: var(--light-gold);
+  }
+
+  .depts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(20px, 3vw, 36px);
+  }
+
+  .dept {
+    padding: 32px 32px 30px;
+    scroll-margin-top: 100px;
+    border-left-width: 14px;
+  }
+
+  .dept:nth-child(4n + 1) {
+    border-left-color: var(--orange);
+  }
+
+  .dept:nth-child(4n + 2) {
+    border-left-color: var(--gold);
+  }
+
+  .dept:nth-child(4n + 3) {
+    border-left-color: var(--light-gold);
+  }
+
+  .dept:nth-child(4n + 4) {
+    border-left-color: var(--espresso);
+  }
+
+  .summary {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+  }
+
+  .items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+
+  .items li {
+    position: relative;
+    padding-left: 26px;
+  }
+
+  .items li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--orange);
+    border: 2px solid var(--espresso);
+  }
+
+  .note {
+    margin: 20px 0 0;
+    padding-top: 14px;
+    border-top: 2px dashed var(--gold);
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+
+  .jobs {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+  }
+
+  .jobs .btn {
+    margin-top: 12px;
+  }
+
+  .job-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+
+  .job-list li {
+    background: var(--cream);
+    border: var(--outline);
+    border-radius: 20px;
+    box-shadow: 4px 4px 0 var(--espresso);
+    padding: 18px 22px;
+  }
+
+  .job-list strong {
+    display: block;
+    font-family: var(--font-label);
+    font-weight: 400;
+    font-size: 1.08rem;
+    color: var(--sunset-deep);
+  }
+
+  .pkgs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 3vw, 36px);
+  }
+
+  .pkg {
+    padding: 32px 30px;
+    background: var(--cream);
+    border-top-width: 14px;
+  }
+
+  .pkg:nth-child(1) {
+    border-top-color: var(--light-gold);
+  }
+
+  .pkg:nth-child(2) {
+    border-top-color: var(--orange);
+  }
+
+  .pkg:nth-child(3) {
+    border-top-color: var(--gold);
+  }
+
+  .pkg h3 {
+    font-size: 2rem;
+  }
+
+  .pkg .for {
+    font-family: var(--font-label);
+    color: var(--sunset-deep);
+    margin-bottom: 0.6em;
+  }
+
+  .pkg p:last-child {
+    margin-bottom: 0;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 900px) {
+    .depts,
+    .jobs {
+      grid-template-columns: 1fr;
+    }
+
+    .pkgs {
+      grid-template-columns: 1fr;
+      max-width: 560px;
+    }
+  }
+</style>

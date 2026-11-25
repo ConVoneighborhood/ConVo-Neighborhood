@@ -1,0 +1,56 @@
+---
+import WaveBand from './WaveBand.astro';
+import { featured } from '../content.js';
+
+const bands: Record<string, { bg: string; colors: string[] }> = {
+  orange: { bg: 'var(--orange)', colors: ['var(--espresso)', 'var(--gold)', 'var(--light-gold)', 'var(--cream)'] },
+  espresso: { bg: 'var(--espresso)', colors: ['var(--orange)', 'var(--gold)', 'var(--light-gold)', 'var(--cream)'] },
+  gold: { bg: 'var(--light-gold)', colors: ['var(--orange)', 'var(--gold)', 'var(--espresso)', 'var(--cream)'] },
+};
+---
+
+<ul class="cards">
+  {featured.map((card) => (
+    <li class="sticker card">
+      <div class="card-top" style={`background:${bands[card.band].bg}`}>
+        <WaveBand colors={bands[card.band].colors} background={bands[card.band].bg} height={64} />
+      </div>
+      <div class="card-body">
+        <p class="label">{card.label}</p>
+        <h3>{card.title}</h3>
+        <p>{card.body}</p>
+      </div>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 3vw, 36px);
+  }
+
+  .card-top {
+    padding-top: 36px;
+  }
+
+  .card-body {
+    padding: 28px 30px 34px;
+  }
+
+  .card-body p:last-child {
+    margin-bottom: 0;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 900px) {
+    .cards {
+      grid-template-columns: 1fr;
+      max-width: 560px;
+    }
+  }
+</style>

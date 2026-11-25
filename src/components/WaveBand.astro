@@ -1,0 +1,46 @@
+---
+/* Wave band: the four brand colors as stacked wavy lines. */
+interface Props {
+  colors?: string[];
+  background?: string;
+  height?: number;
+  class?: string;
+}
+const {
+  colors = ['var(--espresso)', 'var(--gold)', 'var(--light-gold)', 'var(--cream)'],
+  background = 'transparent',
+  height = 72,
+  class: className = '',
+} = Astro.props;
+
+const width = 1200;
+const period = 150;
+const amp = 6;
+const gap = 12;
+const top = 14;
+
+function wave(y: number) {
+  let d = `M0 ${y}`;
+  for (let x = 0; x < width; x += period) {
+    d += ` q ${period / 4} ${-amp * 2} ${period / 2} 0 t ${period / 2} 0`;
+  }
+  return d;
+}
+---
+
+<svg
+  class={`wave-band ${className}`}
+  viewBox={`0 0 ${width} ${height}`}
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  style={`background:${background};height:${height}px`}
+>
+  {colors.map((c, i) => <path d={wave(top + i * gap)} fill="none" stroke={c} stroke-width="9" />)}
+</svg>
+
+<style>
+  .wave-band {
+    width: 100%;
+    display: block;
+  }
+</style>

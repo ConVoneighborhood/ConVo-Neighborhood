@@ -1,0 +1,237 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../site.js';
+
+const topics = [
+  { value: 'general', label: 'Not sure yet, let’s talk' },
+  { value: 'consulting', label: 'Business consulting or a business plan' },
+  { value: 'branding', label: 'Branding and creative' },
+  { value: 'web', label: 'A website or software' },
+  { value: 'marketing', label: 'Marketing and analytics' },
+  { value: 'jobs', label: 'Job seeker or career support' },
+  { value: 'packages', label: 'Annual packages and pricing' },
+  { value: 'join', label: 'Joining as a Resident or Kinfolk' },
+];
+---
+
+<Layout
+  title="Contact"
+  description="Start a conversation with ConVo Neighborhood. Call +1 (669) 386-7921 or send us a message."
+>
+  <PageHeader
+    label="Contact"
+    title="Let’s start a conversation."
+    lede="Call, email or send a message below. Tell us where you are and where you want to be, and we will get back to you with next steps."
+  />
+
+  <section class="section">
+    <div class="wrap contact-grid">
+      <div class="ways">
+        <a class="way sticker" href={site.phoneHref}>
+          <span class="way-label">Call or text</span>
+          <span class="way-value">{site.phoneDisplay}</span>
+        </a>
+        <a class="way sticker" href={`mailto:${site.email}`}>
+          <span class="way-label">Email</span>
+          <span class="way-value email">{site.email}</span>
+        </a>
+        <div class="way sticker static">
+          <span class="way-label">Where we work</span>
+          <span class="way-value">{site.city}, and remote across the U.S.</span>
+        </div>
+      </div>
+
+      <form class="sticker form" id="contact-form" novalidate>
+        <h2>Send a message</h2>
+        <p class="form-help">
+          This opens your email app with your message ready to send. All fields are required.
+        </p>
+
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+
+        <div class="field">
+          <label for="email">Your email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+
+        <div class="field">
+          <label for="topic">What would you like to talk about?</label>
+          <select id="topic" name="topic">
+            {topics.map((t) => <option value={t.value}>{t.label}</option>)}
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Tell us a little more</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+
+        <button class="btn btn-primary" type="submit">Start the conversation</button>
+      </form>
+    </div>
+  </section>
+</Layout>
+
+<script define:vars={{ email: site.email, topics }}>
+  const form = document.getElementById('contact-form');
+  const errorEl = document.getElementById('form-error');
+  const topicSelect = document.getElementById('topic');
+
+  const preset = new URLSearchParams(location.search).get('topic');
+  if (preset && topics.some((t) => t.value === preset)) topicSelect.value = preset;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const from = String(data.get('email') || '').trim();
+    const message = String(data.get('message') || '').trim();
+    const topic = topics.find((t) => t.value === data.get('topic'));
+
+    const missing = [];
+    if (!name) missing.push('your name');
+    if (!from || !/^\S+@\S+\.\S+$/.test(from)) missing.push('a valid email');
+    if (!message) missing.push('a short message');
+
+    form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+    if (missing.length) {
+      const list = missing.length > 1 ? `${missing.slice(0, -1).join(', ')} and ${missing.at(-1)}` : missing[0];
+      errorEl.textContent = `Please add ${list} so we can reply.`;
+      errorEl.hidden = false;
+      if (!name) form.name.setAttribute('aria-invalid', 'true');
+      if (!from || !/^\S+@\S+\.\S+$/.test(from)) form.email.setAttribute('aria-invalid', 'true');
+      if (!message) form.message.setAttribute('aria-invalid', 'true');
+      form.querySelector('[aria-invalid]')?.focus();
+      return;
+    }
+    errorEl.hidden = true;
+
+    const subject = `New conversation: ${topic ? topic.label : 'General'}`;
+    const body = `Name: ${name}\nEmail: ${from}\nTopic: ${topic ? topic.label : 'General'}\n\n${message}`;
+    location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: start;
+  }
+
+  .ways {
+    display: grid;
+    gap: 20px;
+  }
+
+  .way {
+    display: grid;
+    gap: 4px;
+    padding: 22px 26px;
+    background: var(--cream);
+    color: var(--espresso);
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  a.way:hover {
+    color: var(--espresso);
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 var(--orange);
+  }
+
+  .way-label {
+    font-family: var(--font-label);
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sunset-deep);
+  }
+
+  .way-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 1.1rem + 1vw, 1.7rem);
+    line-height: 1.2;
+  }
+
+  .way-value.email {
+    font-size: clamp(1.05rem, 0.95rem + 0.6vw, 1.3rem);
+    overflow-wrap: anywhere;
+  }
+
+  .form {
+    padding: clamp(24px, 4vw, 44px);
+    background: var(--paper);
+  }
+
+  .form h2 {
+    font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.4rem);
+  }
+
+  .form-help {
+    color: var(--ink-soft);
+  }
+
+  .field {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-family: var(--font-label);
+    font-size: 1rem;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    font: inherit;
+    color: var(--espresso);
+    background: var(--cream);
+    border: 2px solid var(--espresso);
+    border-radius: 14px;
+    padding: 12px 14px;
+    min-height: 50px;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+  }
+
+  [aria-invalid='true'] {
+    border-color: var(--sunset-deep);
+    background: #fff3ea;
+  }
+
+  .form-error {
+    margin: 0 0 16px;
+    padding: 12px 16px;
+    font-weight: 500;
+    color: var(--espresso);
+    background: #ffe2cf;
+    border: 2px solid var(--sunset-deep);
+    border-radius: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

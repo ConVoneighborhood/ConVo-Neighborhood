@@ -1,0 +1,69 @@
+---
+import Groove from './Groove.astro';
+import { site } from '../site.js';
+
+interface Props {
+  title?: string;
+  body?: string;
+}
+const {
+  title = 'A new conversation. A new possibility.',
+  body = 'Tell us what you are building, fixing or dreaming up. The first conversation is where everything starts.',
+} = Astro.props;
+---
+
+<section class="section cta-section" aria-labelledby="cta-title">
+  <div class="wrap">
+    <div class="cta on-dark">
+      <div class="groove-wrap">
+        <Groove />
+      </div>
+      <div class="cta-content">
+        <h2 id="cta-title">{title}</h2>
+        <p class="lede">{body}</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="/contact/">Start a conversation</a>
+          <a class="btn btn-dark" href={site.phoneHref}>Call {site.phoneDisplay}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding-top: 0;
+  }
+
+  .cta {
+    position: relative;
+    overflow: hidden;
+    border: var(--outline);
+    border-radius: 36px;
+    box-shadow: 8px 8px 0 var(--orange);
+    padding: clamp(40px, 7vw, 88px) clamp(24px, 6vw, 80px);
+  }
+
+  .groove-wrap {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: clamp(160px, 26vw, 300px);
+    pointer-events: none;
+  }
+
+  .cta-content {
+    position: relative;
+    max-width: 40rem;
+  }
+
+  .cta h2 {
+    color: var(--light-gold);
+  }
+
+  @media (max-width: 640px) {
+    .groove-wrap {
+      opacity: 0.55;
+    }
+  }
+</style>

@@ -1,0 +1,309 @@
+/* ConVo Neighborhood — Retro Groove brand system
+   Source: ConVo Neighborhood Branding Blueprint Kit */
+
+:root {
+  --espresso: #211b12;
+  --cream: #fbf7ed;
+  --paper: #f2e8d5;
+  --gold: #c79a35;
+  --deep-gold: #8d641b;
+  --light-gold: #e8c36a;
+  --orange: #ff751f;
+  --sunset-deep: #b84a00;
+
+  --ink: var(--espresso);
+  --ink-soft: #4a4033;
+
+  --font-display: 'Shrikhand', 'Cooper Black', Georgia, serif;
+  --font-label: 'Righteous', 'Trebuchet MS', sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --outline: 2.5px solid var(--espresso);
+  --pop: 6px 6px 0 var(--espresso);
+  --pop-gold: 4px 5px 0 var(--gold);
+  --radius-card: 28px;
+  --radius-pill: 999px;
+
+  --gutter: clamp(16px, 5vw, 64px);
+  --measure: 62ch;
+  --max: 1200px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--sunset-deep);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--espresso);
+}
+
+:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.on-dark :focus-visible,
+.on-orange :focus-visible {
+  outline-color: var(--light-gold);
+}
+
+.on-orange :focus-visible {
+  outline-color: var(--espresso);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.08;
+  margin: 0 0 0.4em;
+  letter-spacing: 0.005em;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 1.6rem + 4.6vw, 5.4rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+}
+
+h3 {
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.75rem);
+  line-height: 1.15;
+}
+
+p {
+  margin: 0 0 1em;
+  max-width: var(--measure);
+}
+
+.lede {
+  font-size: clamp(1.1rem, 1rem + 0.45vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.label {
+  font-family: var(--font-label);
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sunset-deep);
+  margin: 0 0 0.9rem;
+}
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(64px, 9vw, 120px);
+}
+
+.section-head {
+  max-width: 44rem;
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.on-dark {
+  background: var(--espresso);
+  color: var(--cream);
+}
+
+.on-dark .lede,
+.on-dark p {
+  color: #e9dfcb;
+}
+
+.on-dark .label {
+  color: var(--light-gold);
+}
+
+.on-dark a:not(.btn) {
+  color: var(--light-gold);
+}
+
+.on-dark a:not(.btn):hover {
+  color: var(--cream);
+}
+
+.on-orange {
+  background: var(--orange);
+  color: var(--espresso);
+}
+
+.on-orange .label,
+.on-orange p,
+.on-orange a:not(.btn) {
+  color: var(--espresso);
+}
+
+.on-paper {
+  background: var(--paper);
+}
+
+/* Buttons: sticker pills */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 52px;
+  padding: 0.7em 1.6em;
+  font-family: var(--font-label);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  border: var(--outline);
+  box-shadow: var(--pop-gold);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: 5px 7px 0 var(--gold);
+}
+
+.btn:active {
+  transform: translate(3px, 4px);
+  box-shadow: 0 0 0 var(--gold);
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: var(--espresso);
+}
+
+.btn-primary:hover {
+  color: var(--espresso);
+}
+
+.btn-dark {
+  background: var(--espresso);
+  color: var(--cream);
+}
+
+.btn-dark:hover {
+  color: var(--cream);
+}
+
+.on-dark .btn-dark {
+  border-color: var(--cream);
+}
+
+.on-dark .btn-primary {
+  border-color: var(--cream);
+  color: var(--espresso);
+}
+
+.btn-cream {
+  background: var(--cream);
+  color: var(--espresso);
+}
+
+.btn-cream:hover {
+  color: var(--espresso);
+}
+
+.on-orange .btn {
+  box-shadow: var(--pop);
+}
+
+.on-orange .btn:hover {
+  box-shadow: 5px 7px 0 var(--espresso);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 20px;
+  margin-top: 32px;
+}
+
+/* Sticker card */
+.sticker {
+  background: var(--paper);
+  border: var(--outline);
+  border-radius: var(--radius-card);
+  box-shadow: var(--pop);
+  overflow: hidden;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  background: var(--espresso);
+  color: var(--cream);
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-family: var(--font-label);
+}
+
+.skip-link:focus {
+  top: 12px;
+  color: var(--cream);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

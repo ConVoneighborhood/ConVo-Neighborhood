@@ -1,0 +1,118 @@
+---
+import { steps } from '../content.js';
+---
+
+<ol class="steps">
+  {steps.map((step, i) => (
+    <li class="step">
+      <span class="num" aria-hidden="true">{i + 1}</span>
+      <div>
+        <h3>{step.title}</h3>
+        <p>{step.body}</p>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    counter-reset: step;
+    position: relative;
+  }
+
+  /* the road that connects the steps */
+  .steps::before {
+    content: '';
+    position: absolute;
+    left: 32px;
+    right: 32px;
+    top: 30px;
+    height: 10px;
+    background: repeating-linear-gradient(90deg, var(--gold) 0 18px, transparent 18px 30px);
+    border-radius: 6px;
+  }
+
+  .step {
+    position: relative;
+  }
+
+  .num {
+    display: grid;
+    place-items: center;
+    width: 68px;
+    height: 68px;
+    margin-bottom: 18px;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--espresso);
+    background: var(--orange);
+    border: var(--outline);
+    border-radius: 50%;
+    box-shadow: 4px 4px 0 var(--espresso);
+    position: relative;
+  }
+
+  .step:nth-child(2) .num {
+    background: var(--light-gold);
+  }
+
+  .step:nth-child(3) .num {
+    background: var(--gold);
+  }
+
+  .step:nth-child(4) .num {
+    background: var(--cream);
+  }
+
+  .step:nth-child(5) .num {
+    background: var(--espresso);
+    color: var(--light-gold);
+    border-color: var(--espresso);
+  }
+
+  .step h3 {
+    font-size: 1.35rem;
+  }
+
+  .step p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+  }
+
+  @media (max-width: 1000px) {
+    .steps {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      max-width: 620px;
+    }
+
+    .steps::before {
+      left: 29px;
+      right: auto;
+      top: 34px;
+      bottom: 34px;
+      width: 10px;
+      height: auto;
+      background: repeating-linear-gradient(180deg, var(--gold) 0 18px, transparent 18px 30px);
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .num {
+      margin-bottom: 0;
+    }
+  }
+</style>

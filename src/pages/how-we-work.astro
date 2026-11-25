@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Steps from '../components/Steps.astro';
+import CallToAction from '../components/CallToAction.astro';
+---
+
+<Layout
+  title="How we work"
+  description="Five steps, one conversation: how ConVo Neighborhood takes your idea from the first call to a finished project."
+>
+  <PageHeader
+    label="How we work"
+    title="Five steps, one conversation."
+    lede="Meaningful conversations surface needs, clarify goals and open paths to collaboration. Here is what working with us looks like."
+  />
+
+  <section class="section" aria-labelledby="steps-title">
+    <div class="wrap">
+      <h2 id="steps-title" class="visually-hidden">The five steps</h2>
+      <Steps />
+    </div>
+  </section>
+
+  <section class="section on-paper" aria-labelledby="expect-title">
+    <div class="wrap expect">
+      <div>
+        <p class="label">What to expect</p>
+        <h2 id="expect-title">Clear terms before any work starts.</h2>
+      </div>
+      <div class="facts">
+        <div class="fact">
+          <h3>Written scope</h3>
+          <p>Every project starts with a service agreement that spells out what we deliver, the timeline and the cost.</p>
+        </div>
+        <div class="fact">
+          <h3>Projects or packages</h3>
+          <p>Hire us for a single project, like a business plan or a website, or for a 12-month package with ongoing support.</p>
+        </div>
+        <div class="fact">
+          <h3>Simple payments</h3>
+          <p>Annual packages start with a 20% deposit, then monthly or quarterly payments for the rest of the year.</p>
+        </div>
+        <div class="fact">
+          <h3>Local and remote</h3>
+          <p>We are based in Austin, Texas, and work with Neighbors anywhere in the United States by phone and video.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+  <CallToAction title="Step one is easy." body="Call or send a message, and tell us what you are working on. We will take it from there." />
+</Layout>
+
+<style>
+  .expect {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .fact {
+    background: var(--cream);
+    border: var(--outline);
+    border-radius: 22px;
+    box-shadow: var(--pop);
+    padding: 24px 26px;
+  }
+
+  .fact h3 {
+    font-size: 1.4rem;
+  }
+
+  .fact p {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  .spacer {
+    height: clamp(64px, 9vw, 120px);
+  }
+
+  @media (max-width: 900px) {
+    .expect,
+    .facts {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
